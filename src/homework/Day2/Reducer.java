@@ -52,8 +52,9 @@ public List<Reducer<String, List<Integer> > > groupByPair(List<Mapper<String, In
 public List<Reducer<String, Integer>> reducer(List<Reducer<String, List<Integer> > > myOtherList){
 
 List<Reducer<String, Integer>> finalList= new ArrayList<>();
+finalList= myOtherList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-return finalList;
+    return finalList;
 
 }
 
