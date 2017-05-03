@@ -51,7 +51,9 @@ public List<Reducer<String, List<Integer> > > groupByPair(List<Mapper<String, In
 
 public List<Reducer<String, Integer>> reducer(List<Reducer<String, List<Integer> > > myOtherList){
 
+List<Reducer<String, Integer>> finalList= new ArrayList<>();
 
+return finalList;
 
 }
 
