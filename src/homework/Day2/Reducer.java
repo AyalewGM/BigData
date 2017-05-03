@@ -28,20 +28,14 @@ public class Reducer<K, V> {
     }
 
 
-    public static void main(String[] args) throws IOException {
 
-        String fPath = "C:\\Users\\ayu\\Desktop\\testDataForW1D1.txt";
-        // List<String> mywordList = new ArrayList<String>();
-
-        List<Mapper<String, Integer>> mainList = Mapper.mapperListMaker(fPath);
-
-
-    }
 public List<Reducer<String, List<Integer> > > groupByPair(List<Mapper<String, Integer>> mapperList){
 
         List<Reducer<String, List<Integer>>> reducerList = new ArrayList<>();
 
-        reducerList= mapperList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.toList()));
+        reducerList= mapperList.stream()
+
+                .collect(Collectors.groupingBy());
 
 
 
@@ -57,5 +51,22 @@ finalList= myOtherList.stream().collect(Collectors.groupingBy(Function.identity(
     return finalList;
 
 }
+
+    public static void main(String[] args) throws IOException {
+
+        String fPath = "C:\\Users\\ayu\\Desktop\\testDataForW1D1.txt";
+        // List<String> mywordList = new ArrayList<String>();
+
+        Reducer<String, List<Integer>> myReducer = new Reducer<>();
+
+        List<Mapper<String, Integer>> mainList = Mapper.mapperListMaker(fPath);
+
+        List<Reducer<String, List<Integer>>> reducerInputList = myReducer.groupByPair(mainList);
+
+        List<Reducer<String, Integer>> reducerOutPut = myReducer.reducer(reducerInputList);
+
+
+
+    }
 
 }
