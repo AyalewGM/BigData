@@ -5,7 +5,6 @@ import homework.Day1.Mapper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -16,37 +15,53 @@ public class Reducer<K, V> {
 
     private K key;
 
-    private V value;
+    private List<V> values = new ArrayList<V>();
 
 
 
     public Reducer(K key, V value ) {
 
         this.key= key;
-        this.value= value;
+        this.values.add(value);
+
+    }
+public Reducer(){
+
+}
+
+    public List<Reducer<String, List<Integer>>> groupByPair(List<Pair<String, Integer>> pairList) {
+//List<String> wordKeys = mapperList.stream().map()
+        List<String> wordKeys = pairList.stream()
+                .map(x -> x.getKey())
+                .distinct().collect(Collectors.toList());
+
+
+        List<Reducer<String, List<Integer>>> reducerList = new ArrayList<>();
+
+        for (String key : wordKeys) {
+            List<Integer> listValue = new ArrayList<Integer>();
+            for (Pair<String, Integer> p : pairList) {
+                if (p.getKey().equals(key)) {
+                    listValue.add(p.getValue());
+                }
+            }
+            Reducer<String, List<Integer>> gbp = new Reducer(key, listValue);
+            reducerList.add(gbp);
+        }
+
+       return reducerList;
+
 
     }
 
 
+    public List<Pair<String, Integer>> reducer(List<Reducer<String, List<Integer>>> myOtherList) {
 
-public List<Reducer<String, List<Integer> > > groupByPair(List<Mapper<String, Integer>> mapperList){
+        List<Pair<String, Integer>> finalList = new ArrayList<>();
+        finalList = myOtherList.stream()
+                .map(x -> new Pair(x.key, x.values.size()))
 
-        List<Reducer<String, List<Integer>>> reducerList = new ArrayList<>();
-
-        reducerList= mapperList.stream()
-
-                .collect(Collectors.groupingBy());
-
-
-
-       return reducerList;
-}
-
-
-public List<Reducer<String, Integer>> reducer(List<Reducer<String, List<Integer> > > myOtherList){
-
-List<Reducer<String, Integer>> finalList= new ArrayList<>();
-finalList= myOtherList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .collect(Collectors.toList());
 
     return finalList;
 
@@ -56,14 +71,14 @@ finalList= myOtherList.stream().collect(Collectors.groupingBy(Function.identity(
 
         String fPath = "C:\\Users\\ayu\\Desktop\\testDataForW1D1.txt";
         // List<String> mywordList = new ArrayList<String>();
-
+        Mapper <String, Integer>myMapper = new Mapper<> ();
         Reducer<String, List<Integer>> myReducer = new Reducer<>();
 
-        List<Mapper<String, Integer>> mainList = Mapper.mapperListMaker(fPath);
+        List<Pair<String, Integer>> mainList = myMapper.mapperListMaker(fPath);
 
         List<Reducer<String, List<Integer>>> reducerInputList = myReducer.groupByPair(mainList);
 
-        List<Reducer<String, Integer>> reducerOutPut = myReducer.reducer(reducerInputList);
+        List<Pair<String, Integer>> reducerOutPut = myReducer.reducer(reducerInputList);
 
 
 

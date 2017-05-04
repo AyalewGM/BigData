@@ -1,7 +1,11 @@
 package homework.Day1;
 
+import homework.Day2.Pair;
+
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Ayu on 5/1/2017.
@@ -72,8 +76,8 @@ public class Mapper<K, V> {
 
 
 
-    public static List<Mapper<String,Integer>> mapperListMaker(String fPath) throws IOException {
-        List<Mapper<String, Integer>> mainList = new ArrayList<>();
+    public static List<Pair<String,Integer>> mapperListMaker(String fPath) throws IOException {
+        List<Pair<String, Integer>> mainList = new ArrayList<>();
 
         String[] myArray = fileReader(fPath);
 
@@ -81,11 +85,11 @@ public class Mapper<K, V> {
 
 
         for (String e : wordList) {
-            mainList.add(new Mapper(e, 1));
+            mainList.add(new Pair<>(e,1));
             // System.out.println(e);
         }
 
-        Collections.sort(mainList,  (e1,e2) -> e1.key.compareTo(e2.key));
+        Collections.sort(mainList,  (e1,e2) -> e1.getKey().compareTo(e2.getKey()));
 
         return mainList;
 
@@ -156,15 +160,12 @@ String [] myArray = b.toString().split("[ -\"]+");
 
     public static void main(String[] args) throws IOException {
 
-
-
-
         String fPath = "C:\\Users\\ayu\\Desktop\\testDataForW1D1.txt";
         // List<String> mywordList = new ArrayList<String>();
 
-        List<Mapper<String, Integer>> mainList = mapperListMaker(fPath);
+        List<Pair<String, Integer>> mainList = mapperListMaker(fPath);
 
-        for(Mapper m: mainList) System.out.println(m);
+        for(Pair m: mainList) System.out.println(m);
     }
 
 }
