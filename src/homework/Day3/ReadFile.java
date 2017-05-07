@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 /**
  * Read from file
  */
+
+
+
 public class ReadFile {
 	public String readFileFromDir(String fileDir){
 		String contents="";

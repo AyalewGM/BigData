@@ -7,16 +7,13 @@ import java.util.Scanner;
  */
 public class Tester {
     public static void main(String[] args) {
-
-        System.out.println("Enter the number of splits");
-
+      System.out.println("Enter the number of splits");
       Scanner sc = new Scanner(System.in);
+        int numberOfSplit = sc.nextInt();
 
 
-
-      int numbberOfSplit
         FileReader fileReader= new FileReader();
-        fileReader
+        System.out.println( fileReader.getClass().getSimpleName());
 
 
     }
