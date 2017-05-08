@@ -46,7 +46,7 @@ public class Mapper {
     }
 
 
-    public List<GroupByPair<String, List<Integer>>> compbiner(List<Pair<String, Integer>> pairList) {
+    public List<GroupByPair<String, List<Integer>>> combiner(List<Pair<String, Integer>> pairList) {
 //List<String> wordKeys = mapperList.stream().map()
         List<String> wordKeys = pairList.stream()
                 .map(x -> x.getKey())
@@ -65,7 +65,7 @@ public class Mapper {
             GroupByPair<String, List<Integer>> gbp = new GroupByPair(key, listValue);
             reducerList.add(gbp);
         }
-
+reducerList.forEach(System.out::println);
         return reducerList;
 
 

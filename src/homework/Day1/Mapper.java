@@ -33,14 +33,14 @@ public class Mapper {
      */
 
        public  List<Pair<String,Integer>> map(List<String> stringList)  {
-       // List<Pair<String, Integer>> mainList;// = new ArrayList<>();
+      List<Pair<String, Integer>> mainList;// = new ArrayList<>();
 
-      List mainList= stringList.stream()
+     mainList= stringList.stream()
                .collect(Collectors.groupingBy(Function.identity())).keySet().stream()
                .map(formPair)
                .sorted(pairComparator)
                .collect(Collectors.toList());
-           mainList.forEach(System.out::println);
+          // mainList.forEach(System.out::println);
         return mainList;
     }
 }

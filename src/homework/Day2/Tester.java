@@ -22,8 +22,8 @@ public class Tester {
         file.fileReader(fPath);
         Mapper mapper = new Mapper();
 
-      List<GroupByPair<String, List<Integer>>> reducerInput  = mapper.compbiner(mapper.map(file.fileReader(fPath)));
-
+      List<GroupByPair<String, List<Integer>>> reducerInput  = mapper.combiner(mapper.map(file.fileReader(fPath)));
+      reducerInput.forEach(System.out::println);
       Reducer reducer = new Reducer();
       List<Pair<String, Integer>> reuceroutPut= reducer.reduce(reducerInput);
 
